@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日常信息管理系统</title>
+    {% load static %}
+    <style>
+        body {
+            background-image: url("{% static 'images/background.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            margin: 100px auto;
+            width: 60%;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        a {
+            color: #00f;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>日常计划信息系统</h1>
+        <a href="{% url 'add_task' %}">添加任务</a>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    {{ task.title }} - {{ task.due_date }} - {{ task.status }}
+                    <a href="{% url 'update_task' task.id %}">更新</a>
+                    <a href="{% url 'delete_task' task.id %}">删除</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
